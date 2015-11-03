@@ -1,0 +1,46 @@
+{
+  "name": "eloquent",
+  "private": true,
+  "version": "0.0.0",
+  "description": "learn languages",
+  "repository": "",
+  "license": "GPL",
+  "engines": {
+    "node": ">= 0.10",
+    "npm": ">= 2.1"
+  },
+  "dependencies": {
+    "babel": "5.8.23",
+    "batoh": "0.0.4",
+    "eventemitter3": "1.1.1",
+    "flux": "2.1.1",
+    "keymirror": "0.1.1",
+    "lodash": "3.10.1",
+    "path-to-regexp": "1.2.1",
+    "react": "^0.14.0",
+    "react-addons-css-transition-group": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "uuid": "2.0.1"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browser-sync": "^2.9.8",
+    "browserify": "^11.2.0",
+    "connect-history-api-fallback": "^1.1.0",
+    "eslint": "^1.6.0",
+    "eslint-plugin-babel": "^2.1.1",
+    "eslint-plugin-react": "^3.5.1",
+    "gulp": "^3.9.0",
+    "gulp-less": "^3.0.3",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-manifest": "^0.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.4.0"
+  },
+  "scripts": {
+  }
+}

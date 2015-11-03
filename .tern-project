@@ -1,0 +1,14 @@
+{
+  "defs": [
+    "browser",
+    "ecma5",
+    "ecma6"
+  ],
+  "dontLoad": [
+    "build/**",
+    "node_modules/**"
+  ],
+  "plugins": {
+    "node": true
+  }
+}

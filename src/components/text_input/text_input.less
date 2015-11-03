@@ -1,0 +1,66 @@
+.text-input {
+  width: 100%;
+  height: 100%;
+
+  input,
+  span,
+  label {
+    display: block;
+    border: none;
+  }
+
+  input {
+    padding-top: @font-size-large; // TODO: pixel adjustment
+    font-size: @font-size-large;
+    margin: 0;
+    border: none;
+    width: 100%;
+    // Transparent backgroud so the z-index: -1; <span> can be seen.
+    background: rgba(0, 0, 0, 0);
+    // Hack to make 'rows' attribute apply in Firefox.
+    overflow-x: hidden;
+    // TODO: fix transition properties
+    -webkit-transition: border 0.3s ease-in-out;
+    transition: border 0.3s ease-in-out;
+  }
+
+  input + label {
+    display: block;
+    position: relative;
+    white-space: nowrap;
+    padding: 0;
+    margin: 0;
+    height: 0px;
+  }
+
+  input + label > span {
+    margin: 0;
+    position: absolute;
+    color: @color-text-secondary;
+    font-size: @font-size-large;
+    top: -@font-size-base; // TODO pixel adjustment
+    left: 0px;
+    z-index: -1;
+    -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+    transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+  }
+
+  input:focus {
+    outline: 0;
+  }
+
+  // TODO: tweak
+  &.highlight {
+    input {
+      border: solid 1px;
+    }
+  }
+
+  &.selected {
+    label > span {
+      top: -(@font-size-large * 2);// TODO pixel adjustment
+      font-size: @font-size-small;
+      color: @color-text-primary;
+    }
+  }
+}

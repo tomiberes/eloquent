@@ -1,0 +1,15 @@
+.snackbar {
+  position: fixed;
+  width: 100%;
+  height: @snackbar-height;
+  z-index: @zindex-snackbar;
+  bottom: 0px;
+  background-color: @color-primary-light;
+  bottom: -100%;
+  -webkit-transition: bottom 0.3s ease-in-out;
+  transition: bottom 0.3s ease-in-out;
+
+  &.open {
+    bottom: 0px;
+  }
+}

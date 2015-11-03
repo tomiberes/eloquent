@@ -1,0 +1,51 @@
+// -----------------------------------------------------------------------------
+// Fonts
+
+// base sans serif font for each system
+@font-family-sans: "Roboto", "Helvetica Neue", "Arial", sans-serif;
+@font-family-sans-light: ~'';
+@font-family-serif: serif;
+@font-family-monospace: monospace;
+@font-family-base: @font-family-sans;
+@font-weight-base: 200;
+@font-size-base: 14px;
+@font-size-large: 18px;
+@font-size-small: 11px;
+// Unit-less `line-height` for use in components like buttons.
+@line-height-base: 1.428571429; // 20/14
+// Computed "line-height" (`font-size` * `line-height`) for use with `margin`, `padding`, etc.
+@line-height-computed: floor((@font-size-base * @line-height-base)); // ~20px
+
+// -----------------------------------------------------------------------------
+// Colors
+
+// Main:
+// http://www.materialpalette.com/green/deep-orange
+// Softer backup:
+// http://www.materialpalette.com/green/blue-grey
+
+@color-primary: #4CAF50;
+@color-primary-dark: #388E3C;
+@color-primary-light: #C8E6C9;
+@color-accent: #FF5722;
+@color-divider: #B6B6B6;
+@color-text-icons: #FFFFFF;
+@color-text-primary: #212121;
+@color-text-secondary: #727272;
+
+// -----------------------------------------------------------------------------
+// Sizes
+
+@icon-size: 16px;
+@top-bar-height: 45px;
+@snackbar-height: 58px;
+
+// -----------------------------------------------------------------------------
+// Stacking
+
+@zindex-content: 100;
+@zindex-topbar: 200;
+@zindex-mask: 300;
+@zindex-menu: 400;
+@zindex-modal: 500;
+@zindex-snackbar: 600;

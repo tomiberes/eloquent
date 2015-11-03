@@ -1,0 +1,37 @@
+.top-bar {
+  position: fixed;
+  width: 100%;
+  height: @top-bar-height;
+  z-index: @zindex-topbar;
+  background-color: @color-primary-dark;
+  text-align: center;
+
+  .svg-icon {
+    fill: @color-text-icons;
+  }
+
+  .center {
+  }
+
+  .left {
+    position: relative;
+    float: left;
+    left: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: @font-size-large;
+    color: @color-text-icons;
+  }
+
+  .right {
+    position: relative;
+    float: right;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: @font-size-large;
+    color: @color-text-icons;
+  }
+}
