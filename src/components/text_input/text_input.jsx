@@ -21,6 +21,10 @@ class TextInput extends React.Component {
     return this.state.value;
   }
 
+  setValue(value) {
+    this.state.value = value;
+  }
+
   handleFocus(ev) {
     this.setState({ focused: true });
   }

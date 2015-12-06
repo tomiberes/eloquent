@@ -1,7 +1,9 @@
 import React from 'react';
+import _ from 'lodash';
 import C from '../../constants/constants';
 import Router from '../../util/router';
 import AppActions from '../../actions/app_actions';
+import DeckActions from '../../actions/deck_actions';
 import AppStore from '../../stores/app_store';
 import DeckStore from '../../stores/deck_store';
 import DeckUtils from '../../util//deck_utils';
@@ -21,7 +23,22 @@ class DeckEntry extends React.Component {
   }
 
   checkAnswer() {
-    AppActions.showSnackbar({ message: 'test', action: null });
+    let deck = this.state.deck;
+    let answer = this.refs.answerInput.getValue().toLowerCase();
+    let progress =  AppStore.get(C.Strings.args)[1];
+    let valid = DeckUtils.getItemValue(deck, progress, deck.variants[1]);
+    if (valid) valid = valid.toLowerCase();
+    if (_.isEqual(answer, valid)) {
+      let progress = ++deck.progress;
+      this.refs.answerInput.setValue('');
+      AppActions.showSnackbar({ message: 'Good Job!', action: null });
+      if (progress < deck.items.length) {
+        DeckActions.set(deck);
+        Router.go('deck/' + deck.id + '/' + deck.progress);
+      }
+    } else {
+      AppActions.showSnackbar({ message: 'Wrong answer!', action: null });
+    }
   }
 
   componentDidMount() {
@@ -81,7 +98,7 @@ class DeckEntry extends React.Component {
           <span>{DeckUtils.getItemValue(deck, index, variantOne)}</span>
         </div>
         <div className="line-item">
-          <TextInput label={'In ' + variantTwo + ':'}/>
+          <TextInput ref="answerInput" label={'In ' + variantTwo + ':'}/>
         </div>
         <div className="line-item action-confirm">
           <Button triggerHandler={this.checkAnswer}>
