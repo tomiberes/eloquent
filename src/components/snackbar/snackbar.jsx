@@ -13,8 +13,11 @@ class Snackbar extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.message) {
       let duration = nextProps.duration || C.Durations.SNACKBAR_SHORT;
+      clearTimeout(this.state.timeout);
       this.setState({ active: true });
-      setTimeout(() => { this.setState({ active: false }); }, duration);
+      this.state.timeout = setTimeout(() => {
+        this.setState({ active: false });
+      }, duration);
     }
   }
 

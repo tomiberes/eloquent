@@ -38,9 +38,9 @@ AppStore.dispatchToken = Dispatcher.register((action) => {
   switch (action.type) {
     case C.AppActions.URL_CHANGE:
       set(C.Strings.args, action.payload);
-      // Reset upon navigation
-      set(C.Strings.items, null);
-      set(C.Strings.snackbar, null);
+      // Reset upon navigation?
+      // set(C.Strings.items, null);
+      // set(C.Strings.snackbar, null);
       AppStore.emitChange();
       break;
     case C.AppActions.SET_ITEMS:
