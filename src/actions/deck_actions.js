@@ -1,4 +1,4 @@
-import * as C from '../constants/constants';
+import C from '../constants/constants';
 import Dispatcher from '../dispatcher/dispatcher';
 import DeckLocalService from '../data/local/deck_local_service';
 

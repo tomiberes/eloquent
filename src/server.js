@@ -13,4 +13,4 @@
 // and their usage in project at: https://github.com/kriasoft/react-starter-kit
 
 // Babel require hook https://babeljs.io/docs/usage/require/
-require('babel/register');
+require('babel-register');

@@ -16,19 +16,47 @@ class Router {
 
   _onpopstate(ev) {
     ev.preventDefault();
-    this.match();
+    this._match();
   }
 
   _onhashchange(ev) {
     ev.preventDefault();
-    this.match();
+    this._match();
+  }
+
+  // Match current location with defined routes and invoke handler
+  _match() {
+    let fragment = this.getFragment();
+    let match = null;
+    let route = null;
+    let matched = null;
+    let args = [];
+    for (let path in this.routes) {
+      match = this.routes[path].re.exec(decodeURIComponent(fragment));
+      if (match) {
+        route = this.routes[path];
+        for (let i = 1, l = match.length; i < l; i++) {
+          args.push(match[i]);
+        }
+        matched = {
+          path: fragment,
+          args: args
+        };
+        break;
+      }
+    }
+    if (!matched && this.routes.hasOwnProperty(this.default)) {
+      route = this.routes[this.default];
+      matched = { path: this.default, args: [fragment] };
+    }
+    return route.handler(matched);
   }
 
   start() {
     // ES6 note, Router === this.constructor, assigning value to it creates static class property
     if (Router.started) throw new Error('Router has already been started');
     Router.started = true;
-    this.match();
+    this._match();
     if (this._usePushState) {
       window.addEventListener('popstate', this._onpopstate);
     } else {
@@ -58,34 +86,6 @@ class Router {
     return this._usePushState ? this.getPath() : this.getHash();
   }
 
-  // Match current location with defined routes and invoke handler
-  match() {
-    let fragment = this.getFragment();
-    let match = null;
-    let route = null;
-    let matched = null;
-    let args = [];
-    for (let path in this.routes) {
-      match = this.routes[path].re.exec(decodeURIComponent(fragment));
-      if (match) {
-        route = this.routes[path];
-        for (let i = 1, l = match.length; i < l; i++) {
-          args.push(match[i]);
-        }
-        matched = {
-          path: fragment,
-          args: args
-        };
-        break;
-      }
-    }
-    if (!matched && this.routes.hasOwnProperty(this.default)) {
-      route = this.routes[this.default];
-      matched = { path: this.default, args: [fragment] };
-    }
-    return route.handler(matched);
-  }
-
   // Set route and assign handler
   on(path, handler, opts) {
     let route = {};
@@ -100,7 +100,7 @@ class Router {
   go(path) {
     if (this._usePushState) {
       window.history.pushState({}, document.title, this._prefix + path);
-      this.match(); // pushState() doesn't trigger popstate
+      this._match(); // pushState() doesn't trigger popstate
     } else {
       window.location.hash = this._prefix + path;
     }

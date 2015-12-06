@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from '../../constants/constants';
+import C from '../../constants/constants';
 import AppStore from '../../stores/app_store';
 
 class TopBar extends React.Component {

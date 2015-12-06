@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from '../../constants/constants';
+import C from '../../constants/constants';
 import Router from '../../util/router';
 import AppActions from '../../actions/app_actions';
 import DeckActions  from '../../actions/deck_actions';

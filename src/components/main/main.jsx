@@ -1,6 +1,6 @@
 import React from 'react';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import * as C from '../../constants/constants';
+import C from '../../constants/constants';
 import AppStore from '../../stores/app_store';
 import Snackbar from '../snackbar/snackbar';
 

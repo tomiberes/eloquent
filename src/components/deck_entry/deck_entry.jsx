@@ -1,5 +1,5 @@
 import React from 'react';
-import * as C from '../../constants/constants';
+import C from '../../constants/constants';
 import Router from '../../util/router';
 import AppActions from '../../actions/app_actions';
 import AppStore from '../../stores/app_store';
@@ -17,6 +17,11 @@ class DeckEntry extends React.Component {
     this.state = this.getUpdate();
     this.update = this.update.bind(this);
     this.navigateBack = this.navigateBack.bind(this);
+    this.checkAnswer = this.checkAnswer.bind(this);
+  }
+
+  checkAnswer() {
+    AppActions.showSnackbar({ message: 'test', action: null });
   }
 
   componentDidMount() {
@@ -79,7 +84,7 @@ class DeckEntry extends React.Component {
           <TextInput label={'In ' + variantTwo + ':'}/>
         </div>
         <div className="line-item action-confirm">
-          <Button>
+          <Button triggerHandler={this.checkAnswer}>
             <IconDone />
           </Button>
         </div>

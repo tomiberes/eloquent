@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import * as C from '../../constants/constants.js';
+import C from '../../constants/constants';
 import Button from '../button/button';
 
 class Snackbar extends React.Component {

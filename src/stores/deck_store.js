@@ -1,5 +1,5 @@
 import EventEmitter from 'eventemitter3';
-import * as C from '../constants/constants';
+import C from '../constants/constants';
 import Dispatcher from '../dispatcher/dispatcher';
 
 let _decks = [];
