@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import C from '../../constants/constants';
+import AppActions from '../../actions/app_actions';
 import Button from '../button/button';
 
 class Snackbar extends React.Component {
@@ -16,6 +17,7 @@ class Snackbar extends React.Component {
       clearTimeout(this.state.timeout);
       this.setState({ active: true });
       this.state.timeout = setTimeout(() => {
+        AppActions.showSnackbar(null); // Clear self
         this.setState({ active: false });
       }, duration);
     }

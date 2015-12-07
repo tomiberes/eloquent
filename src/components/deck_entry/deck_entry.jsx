@@ -22,25 +22,6 @@ class DeckEntry extends React.Component {
     this.checkAnswer = this.checkAnswer.bind(this);
   }
 
-  checkAnswer() {
-    let deck = this.state.deck;
-    let answer = this.refs.answerInput.getValue().toLowerCase();
-    let progress =  AppStore.get(C.Strings.args)[1];
-    let valid = DeckUtils.getItemValue(deck, progress, deck.variants[1]);
-    if (valid) valid = valid.toLowerCase();
-    if (_.isEqual(answer, valid)) {
-      let progress = ++deck.progress;
-      this.refs.answerInput.setValue('');
-      AppActions.showSnackbar({ message: 'Good Job!', action: null });
-      if (progress < deck.items.length) {
-        DeckActions.set(deck);
-        Router.go('deck/' + deck.id + '/' + deck.progress);
-      }
-    } else {
-      AppActions.showSnackbar({ message: 'Wrong answer!', action: null });
-    }
-  }
-
   componentDidMount() {
     DeckStore.addChangeListener(this.update);
     AppActions.setItems({
@@ -73,8 +54,31 @@ class DeckEntry extends React.Component {
     };
   }
 
+  checkAnswer() {
+    let deck = this.state.deck;
+    let answer = this.refs.answerInput.getValue().toLowerCase();
+    let progress = AppStore.get(C.Strings.args)[1];
+    let valid = DeckUtils.getItemValue(deck, progress, deck.variants[1]);
+    if (valid) valid = valid.toLowerCase();
+    if (_.isEqual(answer, valid)) {
+      this.refs.answerInput.setValue('');
+      AppActions.showSnackbar({ message: 'Good Job!', action: null });
+      if (progress < deck.items.length) {
+        deck.progress++;
+        DeckActions.set(deck);
+        if (deck.progress === deck.items.length) {
+          Router.go('decks');
+        } else {
+          Router.go('deck/' + deck.id + '/' + deck.progress);
+        }
+      }
+    } else {
+      AppActions.showSnackbar({ message: 'Wrong answer!', action: null });
+    }
+  }
+
   navigateBack() {
-    Router.back();
+    Router.go('decks');
   }
 
   navigateEditDeck() {
