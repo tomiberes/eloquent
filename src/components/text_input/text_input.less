@@ -10,11 +10,12 @@
   }
 
   input {
-    padding-top: @font-size-large; // TODO: pixel adjustment
+    padding-top: @font-size-large;
     font-size: @font-size-large;
     margin: 0;
     border: none;
     width: 100%;
+    height: 100%;
     // Transparent backgroud so the z-index: -1; <span> can be seen.
     background: rgba(0, 0, 0, 0);
     // Hack to make 'rows' attribute apply in Firefox.
@@ -38,7 +39,7 @@
     position: absolute;
     color: @color-text-secondary;
     font-size: @font-size-large;
-    top: -@font-size-base; // TODO pixel adjustment
+    top: (-@font-size-large * 1.5);
     left: 0px;
     z-index: -1;
     -webkit-transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
@@ -58,7 +59,8 @@
 
   &.selected {
     label > span {
-      top: -(@font-size-large * 2);// TODO pixel adjustment
+      // With given pixel font-size minimum text input wrapper height is 45px
+      top: -(@font-size-large * 2.5);
       font-size: @font-size-small;
       color: @color-text-primary;
     }

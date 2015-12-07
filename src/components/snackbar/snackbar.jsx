@@ -17,8 +17,8 @@ class Snackbar extends React.Component {
       clearTimeout(this.state.timeout);
       this.setState({ active: true });
       this.state.timeout = setTimeout(() => {
-        AppActions.showSnackbar(null); // Clear self
         this.setState({ active: false });
+        AppActions.showSnackbar(null); // Clear self
       }, duration);
     }
   }
