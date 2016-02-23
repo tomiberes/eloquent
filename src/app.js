@@ -15,6 +15,9 @@ import DeckListEdit from './components/deck_list_edit/deck_list_edit';
 
 window.React = React; // export for http://fb.me/react-devtools
 
+// TODO: change router imports, to `import { router } from '../../app'`
+// export const router = new Router();
+
 function navigate(args, components) {
   AppActions.urlChange(args);
   ReactDOM.render(<Main {...components} />, document.body);

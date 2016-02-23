@@ -9,8 +9,11 @@ import DeckStore from '../../stores/deck_store';
 import DeckUtils from '../../util//deck_utils';
 import TextInput from '../text_input/text_input';
 import Button from '../button/button';
+import IconArrowForward from '../icons/arrow_forward';
+import IconClear from '../icons/clear';
 import IconChevronLeft from '../icons/chevron_left';
 import IconDone from '../icons/done';
+import IconRefresh from '../icons/refresh';
 import NotFound from '../not_found/not_found';
 
 class DeckEntry extends React.Component {
@@ -20,6 +23,8 @@ class DeckEntry extends React.Component {
     this.update = this.update.bind(this);
     this.navigateBack = this.navigateBack.bind(this);
     this.checkAnswer = this.checkAnswer.bind(this);
+    this.nextEntry = this.nextEntry.bind(this);
+    this.reloadEntry = this.reloadEntry.bind(this);
   }
 
   componentDidMount() {
@@ -50,7 +55,9 @@ class DeckEntry extends React.Component {
   getUpdate() {
     let id = AppStore.get(C.Strings.args)[0];
     return {
-      deck: DeckStore.get(id)
+      deck: DeckStore.get(id),
+      answered: false,
+      correct: false
     };
   }
 
@@ -61,20 +68,36 @@ class DeckEntry extends React.Component {
     let valid = DeckUtils.getItemValue(deck, progress, deck.variants[1]);
     if (valid) valid = valid.toLowerCase();
     if (_.isEqual(answer, valid)) {
-      this.refs.answerInput.setValue('');
-      AppActions.showSnackbar({ message: 'Good Job!', action: null });
-      if (progress < deck.items.length) {
-        deck.progress++;
-        DeckActions.set(deck);
-        if (deck.progress === deck.items.length) {
-          Router.go('decks');
-        } else {
-          Router.go('deck/' + deck.id + '/' + deck.progress);
-        }
-      }
+      this.setState({
+        answered: true,
+        correct: true
+      });
     } else {
-      AppActions.showSnackbar({ message: 'Wrong answer!', action: null });
+      this.setState({
+        answered: true,
+        correct: false
+      });
     }
+  }
+
+  nextEntry() {
+    let deck = this.state.deck;
+    this.refs.answerInput.setValue('');
+    if (deck.progress < deck.items.length) {
+      deck.progress++;
+      DeckActions.set(deck);
+      if (deck.progress !== deck.items.length) {
+        Router.go('deck/' + deck.id + '/' + deck.progress);
+      }
+    }
+  }
+
+  reloadEntry() {
+    this.refs.answerInput.setValue('');
+    this.setState({
+      answered: false,
+      correct: false
+    });
   }
 
   navigateBack() {
@@ -95,6 +118,21 @@ class DeckEntry extends React.Component {
     let index = deck.progress;
     let variantOne = deck.variants[0];
     let variantTwo = deck.variants[1];
+    let checkClassName = 'check';
+    let answeredClassName = 'answered';
+    let naviagationClassName = 'navigation';
+
+    if (this.state.answered) {
+      checkClassName += ' hide';
+      answeredClassName += ' show';
+      naviagationClassName += ' show';
+
+      if (this.state.correct) {
+        answeredClassName += ' correct';
+      } else {
+        answeredClassName += ' wrong';
+      }
+    }
 
     return (
       <div className="deck-entry">
@@ -104,10 +142,27 @@ class DeckEntry extends React.Component {
         <div className="line-item">
           <TextInput ref="answerInput" label={'In ' + variantTwo + ':'}/>
         </div>
-        <div className="line-item action-confirm">
-          <Button triggerHandler={this.checkAnswer}>
-            <IconDone />
+        <div className="line-item actions">
+          {!this.state.correct ?
+            <Button className={naviagationClassName + ' left'} triggerHandler={this.reloadEntry}>
+              <IconRefresh />
+            </Button>
+            :
+            null
+          }
+          <div className={answeredClassName}>
+            {this.state.correct ? <IconDone /> : <IconClear />}
+          </div>
+          <Button className={checkClassName} triggerHandler={this.checkAnswer}>
+            <span>Check</span>
           </Button>
+          {((index + 1) < deck.items.length) ?
+            <Button className={naviagationClassName + ' right'} triggerHandler={this.nextEntry}>
+              <IconArrowForward />
+            </Button>
+            :
+            null
+          }
         </div>
       </div>
     );

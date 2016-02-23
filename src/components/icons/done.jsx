@@ -9,7 +9,7 @@ class IconDone extends React.Component {
 
   render() {
     return (
-      <SVG className="svg-icon icon-confirm">
+      <SVG className="svg-icon icon-done">
         <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
       </SVG>
     );
