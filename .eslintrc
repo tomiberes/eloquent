@@ -1,21 +1,40 @@
 {
   "parser": "babel-eslint",
-  "rules": {
-    "indent": [2, 2, {"SwitchCase": 1}],
-    "jsx-quotes": [2, "prefer-double"],
-    "linebreak-style": [2, "unix"],
-    "quotes": [2, "single"],
-    "semi": [2, "always"],
-    "no-unused-vars": [2, {"vars": "all", "args": "none"}]
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    },
   },
+  "plugins": [
+    "babel",
+    "react"
+  ],
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
-  "extends": "eslint:recommended",
-  "ecmaFeatures": {
-    "modules": true,
-    "jsx": true
+  "extends": [
+    "eslint:recommended"
+  ],
+  "rules": {
+    "curly": [2],
+    "eqeqeq": [2],
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "jsx-quotes": [2, "prefer-double"],
+    "linebreak-style": [2, "unix"],
+    "object-curly-spacing": [2, "never"],
+    "no-multi-spaces": [2],
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
+    "react/jsx-uses-react": [2],
+    "react/jsx-uses-vars": [2]
+  },
+  "globals": {
+
   }
 }
