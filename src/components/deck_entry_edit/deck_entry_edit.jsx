@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import C from '../../constants/constants';
-import Router from '../../util/router';
+import {router} from '../../app';
 import AppActions from '../../actions/app_actions';
 import DeckActions from '../../actions/deck_actions';
 import AppStore from '../../stores/app_store';
@@ -12,7 +12,7 @@ import Button from '../button/button';
 import IconChevronLeft from '../icons/chevron_left';
 import NotFound from '../not_found/not_found';
 
-class DeckEntryEdit extends React.Component {
+export default class DeckEntryEdit extends Component {
   constructor(props) {
     super(props);
     this.state = this.getUpdate();
@@ -68,7 +68,7 @@ class DeckEntryEdit extends React.Component {
   }
 
   navigateBack() {
-    Router.back();
+    router.back();
   }
 
   shownChange(ev) {
@@ -100,5 +100,3 @@ class DeckEntryEdit extends React.Component {
     );
   }
 }
-
-export default DeckEntryEdit;

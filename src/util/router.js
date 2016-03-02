@@ -2,7 +2,7 @@ import pathToRegexp from 'path-to-regexp';
 
 // Tiny on purpose router
 // pushState by default, hash change as fallback or optional
-class Router {
+export default class Router {
   constructor(usePushState = 'true') {
     this._hasPushState = !!(window.history && window.history.pushState);
     this._usePushState = !!(usePushState && this._hasPushState);
@@ -113,7 +113,3 @@ class Router {
     window.history.back();
   }
 }
-
-let router = new Router();
-
-export default router;

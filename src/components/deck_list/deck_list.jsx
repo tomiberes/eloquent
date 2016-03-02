@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import C from '../../constants/constants';
-import Router from '../../util/router';
+import {router} from '../../app';
 import AppActions from '../../actions/app_actions';
 import DeckStore from '../../stores/deck_store';
 import DeckListItem from '../deck_list_item/deck_list_item';
 import Button from '../button/button';
 
-class DeckList extends React.Component {
+export default class DeckList extends Component {
   constructor(props) {
     super(props);
     this.state = this.getUpdate();
@@ -56,11 +57,11 @@ class DeckList extends React.Component {
   }
 
   navigateSettings() {
-    Router.go('settings');
+    router.go('settings');
   }
 
   navigateDeckListEdit() {
-    Router.go('decks/edit');
+    router.go('decks/edit');
   }
 
   render() {
@@ -82,5 +83,3 @@ class DeckList extends React.Component {
     );
   }
 }
-
-export default DeckList;

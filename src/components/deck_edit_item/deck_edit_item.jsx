@@ -1,12 +1,13 @@
-import React from 'react';
-import Router from '../../util/router';
+import React, {Component} from 'react';
+
+import {router} from '../../app';
 import DeckActions from '../../actions/deck_actions';
 import DeckUtils from '../../util//deck_utils';
 import Button from '../button/button';
 import IconEdit from '../icons/edit';
 import IconDelete from '../icons/delete';
 
-class DeckEditItem extends React.Component {
+export default class DeckEditItem extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -17,7 +18,7 @@ class DeckEditItem extends React.Component {
   editDeckEntry() {
     let id = this.props.deck.id;
     let index = this.props.index;
-    Router.go('deck/' + id + '/edit/' + index);
+    router.go('deck/' + id + '/edit/' + index);
   }
 
   deleteDeckEntry() {
@@ -50,5 +51,3 @@ class DeckEditItem extends React.Component {
     );
   }
 }
-
-export default DeckEditItem;

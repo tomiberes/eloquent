@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import isEqual from 'lodash/isEqual';
 
 import C from '../../constants/constants';
-import Router from '../../util/router';
+import {router} from '../../app';
 import AppActions from '../../actions/app_actions';
 import DeckActions from '../../actions/deck_actions';
 import AppStore from '../../stores/app_store';
@@ -17,7 +17,7 @@ import IconDone from '../icons/done';
 import IconRefresh from '../icons/refresh';
 import NotFound from '../not_found/not_found';
 
-class DeckEntry extends React.Component {
+export default class DeckEntry extends Component {
   constructor(props) {
     super(props);
     this.state = this.getUpdate();
@@ -90,7 +90,7 @@ class DeckEntry extends React.Component {
       deck.progress++;
       DeckActions.set(deck);
       if (deck.progress !== deck.items.length) {
-        Router.go('deck/' + deck.id + '/' + deck.progress);
+        router.go('deck/' + deck.id + '/' + deck.progress);
       }
     }
   }
@@ -104,13 +104,13 @@ class DeckEntry extends React.Component {
   }
 
   navigateBack() {
-    Router.go('decks');
+    router.go('decks');
   }
 
   navigateEditDeck() {
     let deck = this.state.deck;
     let id = deck.id;
-    Router.go('deck/' + id + '/edit');
+    router.go('deck/' + id + '/edit');
   }
 
   render() {

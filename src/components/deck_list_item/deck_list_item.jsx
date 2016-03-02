@@ -1,7 +1,8 @@
-import React from 'react';
-import Router from '../../util/router';
+import React, {Component} from 'react';
 
-class DeckListItem extends React.Component {
+import {router} from '../../app';
+
+export default class DeckListItem extends Component {
   constructor(props) {
     super(props);
     this.showDeck = this.showDeck.bind(this);
@@ -9,7 +10,7 @@ class DeckListItem extends React.Component {
 
   showDeck() {
     let deck = this.props.deck;
-    Router.go('deck/' + deck.id + '/' + deck.progress);
+    router.go('deck/' + deck.id + '/' + deck.progress);
   }
 
   render() {
@@ -28,5 +29,3 @@ class DeckListItem extends React.Component {
     );
   }
 }
-
-export default DeckListItem;
