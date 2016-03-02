@@ -30,7 +30,7 @@ export default class DeckListEdit extends Component {
           triggerHandler: this.navigateBack
         },
         children: [
-          React.createElement(IconChevronLeft),
+          React.createElement(IconChevronLeft, {key: 'icon'}),
           'Back'
         ]
       }
