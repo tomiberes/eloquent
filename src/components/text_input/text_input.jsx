@@ -26,15 +26,15 @@ class TextInput extends React.Component {
   }
 
   handleFocus(ev) {
-    this.setState({ focused: true });
+    this.setState({focused: true});
   }
 
   handleBlur(ev) {
-    this.setState({ focused: false });
+    this.setState({focused: false});
   }
 
   handleInput(ev) {
-    this.setState({ value: ev.target.value });
+    this.setState({value: ev.target.value});
   }
 
   render() {

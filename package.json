@@ -6,8 +6,6 @@
   "repository": "",
   "license": "GPL",
   "engines": {
-    "node": ">= 0.10",
-    "npm": ">= 4.2.1"
   },
   "dependencies": {
     "batoh": "0.0.4",
@@ -46,6 +44,7 @@
   },
   "scripts": {
     "build": "./node_modules/.bin/gulp build",
-    "dev": "./node_modules/.bin/gulp watch"
+    "dev": "./node_modules/.bin/gulp watch",
+    "lint": "./node_modules/.bin/eslint 'src/**/*.+(js|jsx)'"
   }
 }

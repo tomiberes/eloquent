@@ -69,7 +69,7 @@ const DeckActions = {
   idbError(err) {
     Dispatcher.dispatch({
       type: C.AppActions.SHOW_SNACKBAR,
-      payload: { message: makeIdbErrorMessage(err) }
+      payload: {message: makeIdbErrorMessage(err)}
     });
   }
 };

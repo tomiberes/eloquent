@@ -47,14 +47,16 @@ class Router {
     }
     if (!matched && this.routes.hasOwnProperty(this.default)) {
       route = this.routes[this.default];
-      matched = { path: this.default, args: [fragment] };
+      matched = {path: this.default, args: [fragment]};
     }
     return route.handler(matched);
   }
 
   start() {
     // ES6 note, Router === this.constructor, assigning value to it creates static class property
-    if (Router.started) throw new Error('Router has already been started');
+    if (Router.started) {
+      throw new Error('Router has already been started');
+    }
     Router.started = true;
     this._match();
     if (this._usePushState) {

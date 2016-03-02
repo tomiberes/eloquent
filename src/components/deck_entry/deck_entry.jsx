@@ -67,7 +67,9 @@ class DeckEntry extends React.Component {
     let answer = this.refs.answerInput.getValue().toLowerCase();
     let progress = AppStore.get(C.Strings.args)[1];
     let valid = DeckUtils.getItemValue(deck, progress, deck.variants[1]);
-    if (valid) valid = valid.toLowerCase();
+    if (valid) {
+      valid = valid.toLowerCase();
+    }
     if (isEqual(answer, valid)) {
       this.setState({
         answered: true,

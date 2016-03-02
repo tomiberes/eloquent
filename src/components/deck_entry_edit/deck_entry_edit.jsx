@@ -1,8 +1,9 @@
 import React from 'react';
+
 import C from '../../constants/constants';
 import Router from '../../util/router';
 import AppActions from '../../actions/app_actions';
-import DeckActions  from '../../actions/deck_actions';
+import DeckActions from '../../actions/deck_actions';
 import AppStore from '../../stores/app_store';
 import DeckStore from '../../stores/deck_store';
 import DeckUtils from '../../util/deck_utils';
@@ -71,11 +72,11 @@ class DeckEntryEdit extends React.Component {
   }
 
   shownChange(ev) {
-    this.setState({ shownValue: ev.target.value });
+    this.setState({shownValue: ev.target.value});
   }
 
   learnedChange(ev) {
-    this.setState({ learndValue: ev.target.value });
+    this.setState({learndValue: ev.target.value});
   }
 
   render() {

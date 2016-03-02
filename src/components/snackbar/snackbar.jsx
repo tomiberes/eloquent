@@ -8,7 +8,9 @@ import Button from '../button/button';
 class Snackbar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { active: false };
+    this.state = {
+      active: false
+    };
     this.handleAction = this.handleAction.bind(this);
   }
 
@@ -16,9 +18,9 @@ class Snackbar extends React.Component {
     if (nextProps.message) {
       let duration = nextProps.duration || C.Durations.SNACKBAR_SHORT;
       clearTimeout(this.state.timeout);
-      this.setState({ active: true });
+      this.setState({active: true});
       this.state.timeout = setTimeout(() => {
-        this.setState({ active: false });
+        this.setState({active: false});
         AppActions.showSnackbar(null); // Clear self
       }, duration);
     }
