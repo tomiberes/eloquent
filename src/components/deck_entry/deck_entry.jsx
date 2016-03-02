@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
+
 import C from '../../constants/constants';
 import Router from '../../util/router';
 import AppActions from '../../actions/app_actions';
@@ -67,7 +68,7 @@ class DeckEntry extends React.Component {
     let progress = AppStore.get(C.Strings.args)[1];
     let valid = DeckUtils.getItemValue(deck, progress, deck.variants[1]);
     if (valid) valid = valid.toLowerCase();
-    if (_.isEqual(answer, valid)) {
+    if (isEqual(answer, valid)) {
       this.setState({
         answered: true,
         correct: true

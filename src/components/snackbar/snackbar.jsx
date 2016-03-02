@@ -1,5 +1,6 @@
 import React from 'react';
-import _ from 'lodash';
+import isFunction from 'lodash/isFunction';
+
 import C from '../../constants/constants';
 import AppActions from '../../actions/app_actions';
 import Button from '../button/button';
@@ -25,7 +26,7 @@ class Snackbar extends React.Component {
 
   handleAction(ev) {
     ev.preventDefault();
-    if (this.props.action && _.isFunction(this.props.action)) {
+    if (this.props.action && isFunction(this.props.action)) {
       this.props.action();
     }
   }
