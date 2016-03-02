@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import isFunction from 'lodash/isFunction';
 
 import C from '../../constants/constants';
 import AppActions from '../../actions/app_actions';
 import Button from '../button/button';
 
-class Snackbar extends React.Component {
+export default class Snackbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,5 +52,3 @@ class Snackbar extends React.Component {
     );
   }
 }
-
-export default Snackbar;

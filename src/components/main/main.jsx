@@ -1,10 +1,10 @@
-import React from 'react';
-// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import React, {Component} from 'react';
+
 import C from '../../constants/constants';
 import AppStore from '../../stores/app_store';
 import Snackbar from '../snackbar/snackbar';
 
-class Main extends React.Component {
+export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = this.getUpdate();
@@ -39,5 +39,3 @@ class Main extends React.Component {
     );
   }
 }
-
-export default Main;

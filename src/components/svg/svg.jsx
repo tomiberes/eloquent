@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 const NS = 'http://www.w3.org/2000/svg';
 
-class SVG extends React.Component {
+export default class SVG extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -23,5 +23,3 @@ class SVG extends React.Component {
 }
 
 SVG.ICON_SIZE = 24;
-
-export default SVG;

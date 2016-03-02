@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import SVG from '../svg/svg';
 
-class IconRefresh extends React.Component {
+export default class IconRefresh extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,5 +16,3 @@ class IconRefresh extends React.Component {
     );
   }
 }
-
-export default IconRefresh;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class TextInput extends React.Component {
+export default class TextInput extends Component {
   constructor(props) {
     super(props);
     let value = this.props.value || '';
@@ -58,5 +58,3 @@ class TextInput extends React.Component {
     );
   }
 }
-
-export default TextInput;

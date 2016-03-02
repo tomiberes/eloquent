@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class TopBarCounter extends React.Component {
+export default class TopBarCounter extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -13,5 +13,3 @@ class TopBarCounter extends React.Component {
     );
   }
 }
-
-export default TopBarCounter;

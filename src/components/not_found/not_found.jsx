@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-class NotFound extends React.Component {
+export default class NotFound extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -14,5 +14,3 @@ class NotFound extends React.Component {
     );
   }
 }
-
-export default NotFound;

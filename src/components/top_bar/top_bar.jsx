@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import C from '../../constants/constants';
 import AppStore from '../../stores/app_store';
 
-class TopBar extends React.Component {
+export default class TopBar extends Component {
   constructor(props) {
     super(props);
     this.state = this.getUpdate();
@@ -49,5 +50,3 @@ class TopBar extends React.Component {
     );
   }
 }
-
-export default TopBar;

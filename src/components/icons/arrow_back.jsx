@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import SVG from '../svg/svg';
 
-class IconArrowBack extends React.Component {
+export default class IconArrowBack extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,5 +16,3 @@ class IconArrowBack extends React.Component {
     );
   }
 }
-
-export default IconArrowBack;
