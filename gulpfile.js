@@ -1,19 +1,19 @@
 'use strict';
 
-var gulp = require('gulp');
-var plug = require('gulp-load-plugins')();
-var gutil = require('gulp-util');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var babelify = require('babelify');
-var watchify = require('watchify');
-var manifest = require('gulp-manifest');
-var browserSync  = require('browser-sync').create();
-var historyApiFallback = require('connect-history-api-fallback');
-var conf = {
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const less = require('gulp-less');
+const manifest = require('gulp-manifest');
+const rename = require('gulp-rename');
+const source = require('vinyl-source-stream');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const envify = require('envify/custom');
+const watchify = require('watchify');
+const browserSync = require('browser-sync').create();
+const historyApiFallback = require('connect-history-api-fallback');
+const conf = {
   name: 'eloquent',
-  debug: process.env.NODE_ENV !== 'production',
-  // debug: false,
   src: {
     root: './src/',
     app: './src/app.js',
@@ -22,13 +22,7 @@ var conf = {
     server: './src/server.js'
   },
   dest: './build/',
-  manifest: 'ditr.manifest',
-  client: {
-
-  },
-  server: {
-
-  }
+  manifest: 'ditr.manifest'
 };
 
 function logMessage(message) {
@@ -42,41 +36,39 @@ function logError(err) {
 }
 
 function scripts(watch) {
-  var bundler = browserify(conf.src.app, {
-    debug: conf.debug,
-    extensions: ['.js', '.jsx']
+  let bundler = browserify(conf.src.app, {
+    basedir: __dirname,
+    debug: watch,
+    extensions: ['.js', '.jsx'],
+    cache: {}, // required for watchify
+    packageCache: {}, // required for watchify
+    fullPaths: watch // required to be true only for watchify
   });
   bundler.transform(babelify.configure({
     sourceMapRelative: conf.root
+  }));
+  bundler.transform(envify({
+    NODE_ENV: watch ? 'development' : 'production'
   }));
 
   if (watch) {
     bundler = watchify(bundler);
     bundler.on('update', bundle);
-    bundler.on('time', function(time) {
+    bundler.on('time', (time) => {
       logMessage('Build time: ' + time / 1000 + ' s');
     });
+  } else {
+    bundler.transform({
+      global: true
+    }, 'uglifyify');
   }
 
   function bundle() {
     logMessage('Building Scripts...');
-
-    var stream = bundler.bundle();
-    stream.on('error', function(err) {
-      logError(err);
-    });
-
-    stream = stream.pipe(source(conf.name + '.js'));
-
-    if (!conf.debug) {
-      stream.pipe(plug.streamify(plug.uglify()));
-    }
-
-    stream.pipe(gulp.dest(conf.dest + 'js'));
-    // Replaced by browserSync output file watcher
-    // stream.pipe(browserSync.stream({ once: true }));
-
-    return stream;
+    return bundler.bundle()
+      .on('error', (err) => logError(err))
+      .pipe(source(conf.name + '.js'))
+      .pipe(gulp.dest(conf.dest + 'js'));
   }
 
   return bundle();
@@ -88,38 +80,32 @@ function startBrowserSync() {
       baseDir: conf.dest,
       middleware: historyApiFallback()
     },
-    files: [conf.dest + '*.html', conf.dest + 'js/*.js', conf.dest + 'css/*.css']
+    files: [
+      conf.dest + '*.html',
+      conf.dest + 'js/*.js',
+      conf.dest + 'css/*.css'
+    ]
   });
 }
 
-gulp.task('scripts', function() {
-  return scripts(false);
-});
+gulp.task('scripts', () =>scripts(false));
 
-gulp.task('scripts:watch', function() {
-  return scripts(true);
-});
+gulp.task('scripts:watch', () => scripts(true));
 
-gulp.task('less', function() {
+gulp.task('less', () => {
   return gulp.src(conf.src.style)
-    .pipe(plug.less())
-    .on('error', function(err) {
-      logError(err);
-    })
-    .pipe(plug.rename('style.css'))
+    .pipe(less())
+    .on('error', (err) => logError(err))
+    .pipe(rename('style.css'))
     .pipe(gulp.dest(conf.dest + 'css'));
 });
 
-gulp.task('copy', function() {
+gulp.task('copy', () => {
   return gulp.src(conf.src.templates + 'index.html')
     .pipe(gulp.dest(conf.dest));
 });
 
-gulp.task('assets', function() {
-
-});
-
-gulp.task('manifest', function() {
+gulp.task('manifest', () => {
   return gulp.src([conf.dest + '**/*'])
     .pipe(manifest({
       hash: true,
@@ -131,20 +117,12 @@ gulp.task('manifest', function() {
     .pipe(gulp.dest(conf.dest));
 });
 
-gulp.task('test', function() {
+gulp.task('build', ['scripts', 'less', 'copy'], () => {});
 
-});
-
-gulp.task('release', function() {
-
-});
-
-gulp.task('watch', ['scripts:watch', 'less', 'copy'], function() {
+gulp.task('watch', ['scripts:watch', 'less', 'copy'], () => {
   startBrowserSync();
   gulp.watch(conf.src.root + '**/*.less', ['less']);
   gulp.watch(conf.src.templates + '**/*.html', ['copy']);
 });
 
-gulp.task('default', ['scripts', 'less', 'copy'], function() {
-
-});
+gulp.task('default', () => gutil.log('Not defined, use specific tasks.'));
