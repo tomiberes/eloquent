@@ -22,7 +22,7 @@ export const router = new Router();
 
 function navigate(args, components) {
   AppActions.urlChange(args);
-  ReactDOM.render(<Main {...components} />, document.body);
+  ReactDOM.render(<Main {...components} />, document.getElementById('root'));
 }
 
 DeckActions.getAll();
